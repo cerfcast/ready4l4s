@@ -12,7 +12,7 @@ extern int errno;
 
 int main() {
 
-  int interface_id = if_nametoindex("tailscale0");
+  int interface_id = if_nametoindex("eth0");
   if (!interface_id) {
     perror("Could not find the interface");
     return -1;
@@ -33,7 +33,7 @@ int main() {
 	struct xdp_program *program = xdp_program__from_bpf_obj(object, "xdp");
 #endif
 
-	struct xdp_program *program = xdp_program__open_file("block.o", "xdp", NULL);
+	struct xdp_program *program = xdp_program__open_file("build/block.o", "xdp", NULL);
   if (!program) {
     //bpf_object__close(object);
     perror("Failed to load the object (b)");
@@ -43,7 +43,6 @@ int main() {
 	int result = xdp_program__attach(program, interface_id, XDP_MODE_SKB, 0);
   if (result) {
     perror("Failed to attach");
-    //bpf_object__close(object);
     return 0;
 	}
 
