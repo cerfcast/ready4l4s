@@ -1,0 +1,18 @@
+TARGET(binary) ;
+INPUT(bpf/block.o)
+
+TARGET(elf64-x86-64)
+OUTPUT_FORMAT("elf64-x86-64", "elf64-x86-64",
+	      "elf64-x86-64")
+OUTPUT_ARCH(i386:x86-64)
+
+SECTIONS
+{
+  .xdp_program : {
+     _xdp_program_start = ABSOLUTE(.);
+     bpf/block.o
+     _xdp_program_end = ABSOLUTE(.);
+  }
+
+}
+INSERT AFTER .data;

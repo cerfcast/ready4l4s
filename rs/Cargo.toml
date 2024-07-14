@@ -1,0 +1,15 @@
+[package]
+name = "rs"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = ["rxdp"]
+
+[dependencies]
+rxdp = { path = "rxdp" }
+signal-hook = "0.3.17"
+
+
+[build-dependencies]
+cc = "1.0.98"
