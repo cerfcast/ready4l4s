@@ -1,0 +1,3 @@
+[submodule "rs/rxdp"]
+	path = rs/rxdp
+	url = git@github.com:hawkinsw/rxdp.git
