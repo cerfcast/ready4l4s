@@ -54,17 +54,21 @@ int selective_drop(struct xdp_md *md) {
       return XDP_PASS;
     }
 
-    __u8 tos = iphdr->tos & 0x3;
-    if (!tos && tcphdr->dest == htons(BLOCKING_PORT)) {
-#if 0
+    __u8 ip_tos = iphdr->tos & 0x3;
+    __u8 tcp_tos = tcphdr->ece;
+    if (!ip_tos && !tcp_tos && tcphdr->dest == htons(BLOCKING_PORT)) {
+#ifdef VERBOSE_LOGGING
       char msg[] = "Would drop from %lu\n";
-      bpf_trace_printk(msg, sizeof(msg), iphdr->saddr);
+      bpf_trace_printk(msg, sizeof(msg), htonl(iphdr->saddr));
 #endif
+      return XDP_DROP;
       *pm += 1;
     }
 
+#ifdef VERBOSE_LOGGING
     char msg[] = "Letting packet pass from %lu\n";
     bpf_trace_printk(msg, sizeof(msg), htonl(iphdr->saddr));
+#endif
     return XDP_PASS;
   }
 

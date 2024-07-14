@@ -1,1 +1,2 @@
 #cmakedefine BLOCKING_PORT @BLOCKING_PORT@
+#cmakedefine VERBOSE_LOGGING
