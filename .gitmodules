@@ -1,3 +1,6 @@
 [submodule "rs/rxdp"]
 	path = rs/rxdp
 	url = git@github.com:hawkinsw/rxdp.git
+[submodule "echo/nix"]
+	path = echo/nix
+	url = https://github.com/nix-rust/nix.git
