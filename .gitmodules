@@ -4,3 +4,6 @@
 [submodule "echo/nix"]
 	path = echo/nix
 	url = https://github.com/nix-rust/nix.git
+[submodule "diagnose/bleecn"]
+	path = diagnose/bleecn
+	url = git@github.com:cerfcast/bleecn.git
